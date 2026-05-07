@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int readNumber() {
+	int Num;
+	cout << "Give me the starting number of the sequence :";
+	cin >> Num;
+	return Num;
+}
+void printNumbersInRangeFromNTo1_byForLoop(int Num)
+{
+	cout << "print numbers in range by for loop" << endl;
+	for (int Counter = Num; Counter >= 1; Counter--) {
+		cout << Counter << " ";}
+}
+void printNumbersInRangeFromNTo1_byWhileLoop(int Num) {
+	int Counter = Num;
+	cout << "print numbers in range by while loop" << endl;
+	while (Counter >= 1) {
+		cout << Counter << " ";
+		Counter--;	}
+}
+void printNumbersInRangeFromNTo1_byDo_WhileLoop(int Num) {
+	int Counter = Num;
+	cout << "print numbers in range by do...while loop" << endl;
+	do {
+		cout << Counter << " "; Counter--;	} while (Counter >= 1);
+}
+int main()
+{
+	int Num = readNumber();
+	printNumbersInRangeFromNTo1_byForLoop(Num);
+	cout << endl;
+	printNumbersInRangeFromNTo1_byWhileLoop(Num);
+	cout << endl;
+	printNumbersInRangeFromNTo1_byDo_WhileLoop(Num);
+	return 0;
+}

@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+using namespace std;
+struct strTaskDuration
+{
+	int NumberOfDays, NumberOfHours, NumberOfMinutes, NumberOfSeconds;
+};
+int ReadPositiveNumber(string Message)
+{
+	int Number;
+	do {
+		cout << Message;
+		cin >> Number;
+	} while (Number < 0);
+	return Number;
+}
+strTaskDuration ReadTaskDuration()
+{
+	strTaskDuration TaskDuration = {};
+	TaskDuration.NumberOfDays = ReadPositiveNumber("please enter days of time work :");
+	TaskDuration.NumberOfHours = ReadPositiveNumber("please enter Hours of time work :");
+	TaskDuration.NumberOfMinutes = ReadPositiveNumber("please enter minutes of time work :");
+	TaskDuration.NumberOfSeconds = ReadPositiveNumber("please enter seconds of time work :");
+	return TaskDuration;
+}
+long TaskDurationsInSeconds(strTaskDuration TaskDuration)
+{
+	long DurationInSeconds = 0;
+	DurationInSeconds += TaskDuration.NumberOfDays * 24 * 60 * 60;
+	DurationInSeconds += TaskDuration.NumberOfHours * 60 * 60;
+	DurationInSeconds += TaskDuration.NumberOfMinutes * 60;
+	DurationInSeconds += TaskDuration.NumberOfSeconds;
+	return DurationInSeconds;
+}
+void PrintWorkTimeInSecond()
+{
+	strTaskDuration TaskDuration = ReadTaskDuration();
+	cout << endl << "****************************************************" << endl;
+	cout << "your Days of time work is     :" << TaskDuration.NumberOfDays << endl;
+	cout << "your Hours of time work is    :" << TaskDuration.NumberOfHours << endl;
+	cout << "your Minutes of time work is  :" << TaskDuration.NumberOfMinutes << endl;
+	cout << "your Seconds of time work is  :" << TaskDuration.NumberOfSeconds << endl;
+	cout << "====================================================" << endl;
+	cout << "Your Total Time In Seconds is :" << TaskDurationsInSeconds(TaskDuration) << endl;
+	cout << "****************************************************" << endl;
+}
+int main()
+{
+	PrintWorkTimeInSecond();
+	return 0;
+}

@@ -1,0 +1,63 @@
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+enum enDayOfWeek { Sat = 1, Sun = 2, Mon = 3, Tue = 4, Wed = 5, Thu = 6, Fri = 7 };
+int ReadPositiveNumber(string Message)
+{
+	int Number;
+	do {
+		cout << Message;
+		cin >> Number;
+	} while (Number < 0);
+	return Number;
+}
+int ReadDay()
+{
+	return ReadPositiveNumber("Enter any day number to find its week & name :");
+}
+enDayOfWeek GetDayOfWeek(int Day)
+{
+	switch (Day % 7)
+	{
+	case 1: 
+		return enDayOfWeek::Sat;
+	case 2:
+		return enDayOfWeek::Sun;
+	case 3:
+		return enDayOfWeek::Mon;
+	case 4:
+		return enDayOfWeek::Tue;
+	case 5:
+		return enDayOfWeek::Wed;
+	case 6:
+		return enDayOfWeek::Thu;
+	default:
+		return enDayOfWeek::Fri;
+	}
+}
+string GetDayName(enDayOfWeek DayOfWeek)
+{
+	string ArrDayNames[] = { "", "Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+	return ArrDayNames[DayOfWeek];
+}
+float GetNumberOfWeek(float Day)
+{
+	return ceil(Day / 7);
+}
+void PrintResult()
+{
+	int Day = ReadDay();
+	enDayOfWeek DayOfWeek = GetDayOfWeek(Day);
+	int Week = GetNumberOfWeek(Day);
+	cout << endl << "Your Number is :" << Day << endl;
+	cout << "===============================================" << endl;
+	cout << "The number of week is :" << Week << endl;
+	cout << "The day is :" << GetDayName(DayOfWeek) << endl;
+	cout << "===============================================" << endl;
+}
+int main ()
+{
+	PrintResult();
+	return 0;
+}

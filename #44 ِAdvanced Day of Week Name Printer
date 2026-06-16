@@ -1,0 +1,66 @@
+/*
+======================================================================
+⚙️ Problem      : #44 - Day of Week Name Printer (Model Solution)
+👤 Course       : Algorithms & Problem Solving Level 2
+📝 Description  : Reads a day number (1-7) and returns the day name
+                  using explicit Enum Casting and standard Switch-Case.
+======================================================================
+*/
+#include <iostream>
+#include <string>
+using namespace std;
+enum enDayOfWeek { Sat = 1, Sun = 2, Mon = 3, Tue = 4, Wed = 5,
+    Thu = 6, Fri = 7 };
+int ReadPositiveNumber(string Message)
+{
+    int Number;
+    do {
+        cout << Message;
+        cin >> Number;
+    } while (Number <= 0);
+    return Number;
+}
+enDayOfWeek ReadDay()
+{
+    return (enDayOfWeek)ReadPositiveNumber("Enter any day number (1 to 7): ");
+}
+string GetDayOfWeekName(enDayOfWeek Day)
+{
+    switch (Day)
+    {
+    case enDayOfWeek::Sat:  return "Saturday";
+    case enDayOfWeek::Sun:  return "Sunday";
+    case enDayOfWeek::Mon:  return "Monday";
+    case enDayOfWeek::Tue:  return "Tuesday";
+    case enDayOfWeek::Wed:  return "Wednesday";
+    case enDayOfWeek::Thu:  return "Thursday";
+    case enDayOfWeek::Fri:  return "Friday";
+    default:                return "Invalid Day!";
+    }
+}
+void PrintNameOfDay()
+{
+    enDayOfWeek Day = ReadDay();
+
+    if (Day < 1 || Day > 7) {
+        cout << "\n|=============================================|" << endl;
+        cout << "| The week has 7 days. What's on your mind?   |" << endl;
+        cout << "|=============================================|" << endl;
+        return;
+    }
+
+    cout << "\nYour Day Number is: " << Day << endl;
+    cout << "|=============================================|" << endl;
+    cout << "| The day's name is: " << GetDayOfWeekName(Day);
+    if (Day == enDayOfWeek::Wed) cout << "                |";
+    else if (Day == enDayOfWeek::Sat || Day == enDayOfWeek::Thu)cout << "                 |";
+    else if (Day == enDayOfWeek::Tue)cout << "                  |";
+    else cout << "                   |";
+
+    cout << endl << "|=============================================|" << endl;
+}
+int main()
+{
+    PrintNameOfDay();
+    return 0;
+}

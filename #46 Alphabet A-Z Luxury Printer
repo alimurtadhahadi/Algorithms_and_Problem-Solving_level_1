@@ -1,0 +1,73 @@
+/*
+======================================================================
+⚙️ Problem      : #46 - Alphabet A-Z Luxury Printer (Menu Driven)
+👤 Author       : Ali_Dev (@Ali_Dev-Code-Lab)
+🌐 Channel URL  : https://www.youtube.com/channel/UCaSc-7rRD4t0fVPI67UErzQ
+📝 Course       : Algorithms & Problem Solving Level 1
+📝 Description  : Prints letters from A to Z horizontally or vertically
+                  inside a perfectly aligned luxury geometric box.
+======================================================================
+*/
+#include <iostream>
+#include <string>
+using namespace std;
+void ClearScreen()
+{
+    cout << "\033[H\033[J";
+}
+int UserChoiceNumber()
+{
+    int ChoiceNumber;
+    do {
+        cout << "Please choose 1 or 2: ";
+        cin >> ChoiceNumber;
+    } while (ChoiceNumber <= 0 || ChoiceNumber >= 3);
+    return ChoiceNumber;
+}
+void PrintLettersAtoZHorizontally()
+{
+    cout << "||" << string(54, '=') << "||" << endl;
+    cout << "||  ";
+
+    for (char c = 'A'; c <= 'Z'; c++)
+    {
+        cout << c << " ";
+    }
+
+    cout << "||" << endl;
+    cout << "||" << string(54, '=') << "||" << endl;
+}
+void PrintLettersAtoZVertically()
+{
+    cout << "=========" << endl;
+    for (char c = 'A'; c <= 'Z'; c++)
+    {
+        cout << "||  " << c << "  ||" << endl;
+    }
+    cout << "=========" << endl;
+
+    cout << "\nIf You want to copy letters only: hold ALT button, right-click and move the mouse or your finger (if you use a touchpad)!" << endl;
+}
+void PrintMenu()
+{
+    cout << "1 - Print Letters from A to Z Horizontally" << endl;
+    cout << "2 - Print Letters from A to Z Vertically" << endl;
+}
+void PrintResults()
+{
+    PrintMenu();
+    int UserChoice = UserChoiceNumber();
+    if (UserChoice == 1) {
+        ClearScreen();
+        PrintLettersAtoZHorizontally();
+    }
+    else {
+        ClearScreen();
+        PrintLettersAtoZVertically();
+    }
+}
+int main()
+{
+    PrintResults();
+    return 0;
+}

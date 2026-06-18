@@ -1,0 +1,94 @@
+/*
+======================================================================
+⚙️ Problem      : #45 - Month of Year Luxury Printer (Model Solution)
+👤 Author       : Ali_Dev (@Ali_Dev-Code-Lab)
+🌐 Channel URL  : https://www.youtube.com/channel/UCaSc-7rRD4t0fVPI67UErzQ
+📝 Course       : Algorithms & Problem Solving Level 1
+⚠️ Security    : Fixed Truthy logical bug & secured precise UI padding.
+======================================================================
+*/
+
+#include <iostream>
+#include <string>
+using namespace std;
+enum enMonthOfYear {
+    Jan = 1, Feb = 2, Mar = 3, Apr = 4, May = 5, Jun = 6, Jul = 7, Aug = 8, Sep = 9, Oct = 10, Nov = 11, Dec = 12
+};
+int ReadPositiveNumber(string Message)
+{
+    int Number = 0;
+    do
+    {
+        cout << Message;
+        cin >> Number;
+    } while (Number <= 0);
+    return Number;
+}
+enMonthOfYear ReadDay()
+{
+    return (enMonthOfYear)ReadPositiveNumber("Enter any Month number (1 to 12) :");
+}
+string GetMonthName(enMonthOfYear Month)
+{
+    switch (Month)
+    {
+    case enMonthOfYear::Jan:  return "January";
+    case enMonthOfYear::Feb:  return "February";
+    case enMonthOfYear::Mar:  return "March";
+    case enMonthOfYear::Apr:  return "April";
+    case enMonthOfYear::May:  return "May";
+    case enMonthOfYear::Jun:  return "June";
+    case enMonthOfYear::Jul:  return "July";
+    case enMonthOfYear::Aug:  return "August";
+    case enMonthOfYear::Sep:  return "September";
+    case enMonthOfYear::Oct:  return "October";
+    case enMonthOfYear::Nov:  return "November";
+    case enMonthOfYear::Dec:  return "December";
+    default:                  return "Invalid Month!";
+    }
+}
+void CheckResult(enMonthOfYear Month)
+{
+    if (Month > 12) {
+        cout << "| The year has 12 months. What's on your mind?   |" << endl;
+    }
+    else {
+        cout << "| " << GetMonthName(Month);
+        if (Month == enMonthOfYear::Jan || Month == enMonthOfYear::Oct) {
+            cout << string(39, ' ');
+        }
+        else if (Month == enMonthOfYear::Feb || Month == enMonthOfYear::Nov || Month == enMonthOfYear::Dec) {
+            cout << string(38, ' ');
+        }
+        else if (Month == enMonthOfYear::Mar || Month == enMonthOfYear::Apr) {
+            cout << string(41, ' ');
+        }
+        else if (Month == enMonthOfYear::May) {
+            cout << string(43, ' ');
+        }
+        else if (Month == enMonthOfYear::Jun || Month == enMonthOfYear::Jul) {
+            cout << string(42, ' ');
+        }
+        else if (Month == enMonthOfYear::Aug) {
+            cout << string(40, ' ');
+        }
+        else {
+            cout << string(37, ' ');
+        }
+        cout << "|" << endl;
+    }
+}
+void PrintMonthOfYear()
+{
+    enMonthOfYear Month = ReadDay();
+
+    cout << "\nYour Number is :" << Month << endl;
+    cout << "|===============================================|" << endl;
+    CheckResult(Month);
+    cout << "|===============================================|" << endl;
+}
+int main()
+{
+    PrintMonthOfYear();
+    return 0;
+}

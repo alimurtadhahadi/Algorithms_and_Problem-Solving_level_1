@@ -1,0 +1,78 @@
+/*
+======================================================================
+⚙️ Problem      : #49 - ATM PIN Validation (Ali's Upgraded Edition)
+👤 Author       : Course Teacher (Core Logic) & Ali_Dev (UI/UX Upgrades)
+🌐 Channel URL  : https://www.youtube.com/channel/UCaSc-7rRD4t0fVPI67UErzQ
+📝 Course       : Algorithms & Problem Solving
+📝 Description  : Teacher's standard ATM login logic, upgraded by Ali
+                  with dynamic screen flashing and hardware audio alerts.
+======================================================================
+*/
+#include <iostream>
+#include <string>
+#include <windows.h> //this libary for system colors and delays
+using namespace std;
+void ClearScreen()
+{
+    cout << "\033[H\033[J"; // This command clears the screen cleanly
+}
+bool Login(string ApprovedPIN, string AttemptToOpenPIN)
+{
+    if (AttemptToOpenPIN == ApprovedPIN)
+        return true;
+    else
+        return false;
+}
+void ShowRedAlertEffect()
+{
+    system("color 4F"); // Changes entire console background to Red
+    cout << "==================================\n";
+    cout << "   WRONG PIN!!! ACCESS DENIED!!!   \n";
+    cout << "==================================\n";
+    Sleep(1000); // Freezes the screen for exactly 1 second
+    system("color 0F"); // Reverts color back to normal black
+}
+string EnterNewPIN()
+{
+    string NewPIN;
+    cout << "Please enter your new PIN: ";
+    getline(cin, NewPIN);
+    return NewPIN;
+}
+string TryToLogin(string ApprovedPIN)
+{
+    ClearScreen();
+    string AttemptToOpenPIN;
+    do {
+        cout << "Please enter your PIN to access balance: ";
+        getline(cin, AttemptToOpenPIN);
+
+        if (!Login(ApprovedPIN, AttemptToOpenPIN)) {
+            ClearScreen();
+            cout << "\a"; // Triggers hardware beep sound on failure
+            ShowRedAlertEffect();
+        }
+    } while (!Login(ApprovedPIN, AttemptToOpenPIN));
+
+    return AttemptToOpenPIN;
+}
+void PrintBalance()
+{
+    int Balance = 7500;
+    string ApprovedPIN = EnterNewPIN();
+    string AttemptToOpenPIN = TryToLogin(ApprovedPIN);
+
+    if (Login(ApprovedPIN, AttemptToOpenPIN)) {
+        ClearScreen();
+        cout << "|======================================|" << endl;
+        cout << "|        Ali_Dev Secure Ledger         |" << endl;
+        cout << "|======================================|" << endl;
+        cout << "| Your Current Balance is: $" << Balance << "       |" << endl;
+        cout << "|======================================|" << endl;
+    }
+}
+int main()
+{
+    PrintBalance();
+    return 0;
+}

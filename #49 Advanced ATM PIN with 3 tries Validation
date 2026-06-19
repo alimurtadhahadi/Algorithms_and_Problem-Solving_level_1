@@ -1,0 +1,75 @@
+/*
+======================================================================
+⚙️ Problem : #49-ATM PIN Validation(Perfect Visual Logic)
+👤 Author : Ali_Dev(@Ali_Dev-Code-Lab)
+🌐 Channel URL : https://www.youtube.com/channel/UCaSc-7rRD4t0fVPI67UErzQ
+📝 Course : Algorithms & Problem Solving Level 1
+📝 Description : Fully restored Ali's green visual feedback loop using
+pure logical structure while keeping code clean.
+======================================================================
+*/
+#include <iostream>
+#include <string>
+#include <windows.h> 
+using namespace std;
+void ClearScreen() { cout << "\033[H\033[J"; } // Wipes console screen cleanly
+bool Login(string ApprovedPIN, string AttemptToOpenPIN) {
+    return (AttemptToOpenPIN == ApprovedPIN); // Direct boolean expression evaluation
+}
+void ShowRedAlertEffect(int RemainingTries) {
+    system("color 4F"); // Red background
+    cout << "==================================\n   WRONG PIN!!! ACCESS DENIED!!!\n==================================\n";
+    Sleep(1000); system("color 0F"); ClearScreen(); // Reset color and clear screen
+    cout << "Try again. You have " << RemainingTries << " tries left.\n";
+}
+void ShowLockoutScreen() {
+    ClearScreen();
+    cout << "|=======================================================|\n|  YOUR ACCOUNT IS LOCKED! CONTACT THE BANK TO OPEN IT  |\n|=======================================================| \n";
+    for (int i = 0; i < 10; i++) { // Alarm loop flashes red/black
+        system("color 4F"); Sleep(500);
+        system("color 0F"); Sleep(500);
+    }
+}
+void ShowGreenAlert() {
+    int Balance = 7500; ClearScreen();
+    // Using Ali's hybrid padding design to center text flawlessly
+    cout << "\033[11;36H" << "||==============================================||" << endl;
+    cout << string(35, ' ') << "||==============================================||" << endl;
+    cout << string(35, ' ') << "||                                              ||" << endl;
+    cout << string(35, ' ') << "||           WELCOME TO Ali_Dev BANK            ||" << endl;
+    cout << string(35, ' ') << "||                                              ||" << endl;
+    cout << string(35, ' ') << "||==============================================||" << endl;
+    cout << string(35, ' ') << "||==============================================||" << endl;
+
+    for (int i = 0; i < 3; i++) { // Green celebration loop
+        system("color 2F"); Sleep(500);
+        system("color 0F"); Sleep(500);
+    }
+    ClearScreen(); // Display final balance matrix smoothly
+    cout << "|======================================|\n|        Ali_Dev Secure Ledger         |\n|======================================|\n"
+        << "| Your Current Balance is: $" << Balance << "       |\n|======================================|\n";
+}
+string EnterNewPIN() {
+    string NewPIN; cout << "Please enter your new PIN: ";
+    getline(cin, NewPIN); return NewPIN; // Return established code
+}
+string TryToLogin(string ApprovedPIN) {
+    ClearScreen(); string Attempt; int Tries = 3;
+    do {
+        cout << "Please enter your PIN to access balance: "; getline(cin, Attempt);
+        if (Login(ApprovedPIN, Attempt)) return Attempt; // Safe immediate exit code
+
+        Tries--; ClearScreen(); cout << "\a"; // Failure block decrement
+        if (Tries > 0) ShowRedAlertEffect(Tries);
+    } while (Tries > 0);
+
+    ShowLockoutScreen(); return ""; // Blocked hacker terminal exit
+}
+void PrintBalance() {
+    string ApprovedPIN = EnterNewPIN();
+    string Attempt = TryToLogin(ApprovedPIN);
+    if (Login(ApprovedPIN, Attempt)) ShowGreenAlert(); // Trigger success vault
+}
+int main() {
+    PrintBalance(); return 0; // Standard core application return
+}

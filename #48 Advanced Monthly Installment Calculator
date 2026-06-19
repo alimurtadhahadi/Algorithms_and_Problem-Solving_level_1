@@ -1,0 +1,70 @@
+/*
+======================================================================
+⚙️ Problem      : #48 - Monthly Installment Calculator (Course Track)
+👤 Author       : Ali_Dev (@Ali_Dev-Code-Lab)
+🌐 Channel URL  : https://www.youtube.com/channel/UCaSc-7rRD4t0fVPI67UErzQ
+📝 Course       : Algorithms & Problem Solving Level 1
+📅 Date         : June 2026
+📝 Description  : Takes loan amount and duration in months to compute
+                  the exact monthly installment with perfect UI padding.
+======================================================================
+*/
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+void ClearScreen()
+{
+    cout << "\033[H\033[J";
+}
+
+struct stUserInstallments
+{
+    float LoanAmount, MonthsToPay;
+};
+
+float ReadPositiveNumber(string Message)
+{
+    float Number = 0;
+    do
+    {
+        cout << Message;
+        cin >> Number;
+    } while (Number <= 0);
+
+    return Number;
+}
+
+stUserInstallments ReadUserInstallments()
+{
+    stUserInstallments UserInstallments;
+    UserInstallments.LoanAmount = ReadPositiveNumber("Please enter loan amount: ");
+    UserInstallments.MonthsToPay = ReadPositiveNumber("How many months to pay your loan: ");
+    return UserInstallments;
+}
+
+float MonthlyInstallments(stUserInstallments UserInstallments)
+{
+    return UserInstallments.LoanAmount / UserInstallments.MonthsToPay;
+}
+void PrintResults()
+{
+    stUserInstallments UserInstallments = ReadUserInstallments();
+    float Installments = MonthlyInstallments(UserInstallments);
+    ClearScreen();
+    cout << "==================================================" << endl;
+    cout << "           Ali_Dev Monthly Payment Report         " << endl;
+    cout << "==================================================" << endl;
+    cout << "  Your Loan Amount is          : $" << UserInstallments.LoanAmount << endl;
+    cout << "  Your Total Months to Pay is  : " << UserInstallments.MonthsToPay << " Months" << endl;
+    cout << "--------------------------------------------------" << endl;
+    cout << "  Your Monthly Installment is  : $" << Installments << endl;
+    cout << "==================================================" << endl;
+}
+
+int main()
+{
+    PrintResults();
+    return 0;
+}
